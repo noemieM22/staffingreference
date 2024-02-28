@@ -19,14 +19,14 @@ class Asset_type(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['asset_type_FR'], name='unique Asset_category')
+            models.UniqueConstraint(fields=['asset_type_FR'], name='unique Asset_type')
         ]
 
 class Asset(models.Model):
 
     asset_FR =  models.CharField("Libellé d'un actif",max_length=50)
-    asset_category = ForeignKey(Asset_category, on_delete = models.CASCADE,related_name='Asset_category')
-    asset_type = ForeignKey(Asset_type, on_delete = models.CASCADE,related_name='Asset_type')
+    asset_category = models.ForeignKey(Asset_category, on_delete = models.CASCADE,related_name='Asset_category')
+    asset_type = models.ForeignKey(Asset_type, on_delete = models.CASCADE,related_name='Asset_type')
 
     class Meta:
         constraints = [
