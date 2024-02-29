@@ -1,0 +1,70 @@
+<html>
+{% extends 'appli/general/base.html' %}
+{% load appli_tags %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block general %}
+<script src="{% static '/appli/assetdetail.js' %}"></script>
+{% show_menu_asset menubt %}
+
+<div class='col-10'>
+
+              <!-- bloc  ajouter-->
+    <div >
+      <h2 id='favori_title' favori_id={{object.id}} >Base de données: {{object.label|title}}</h2>
+
+      <div id='bdd_detail' class="part">
+        <h3 class="h4">Infomations générales</h3>
+        <ul style = 'list-style-type:none'>
+          <li> Serveur </li>
+            <ul >
+              <li>Adresse IP: {{object.host_ip}}</li>
+              <li>Nom:  {{object.host_name}}</li>
+            </ul>
+          <li> Login "{{object.login}}"</li>
+        </ul>
+      </div>
+
+      <div id='bdd_elems' class ="part" >
+        <h3 class="h4">Schémas, tables et attributs</h3>
+        <p> A quoi ça sert?...</br>Pensez à renouveller cette action en cas de changement de modèle! </p>
+        {% if elems %}
+        <table
+          class= "tabletags table table-hover table-bordered table-responsive[-sm|-md|-lg|-xl]"
+        >
+          <thead>
+            <tr>
+              <th>Database</th>
+              <th>Tables</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key,values in elems.items %}
+              <tr>
+                <td>{{key|title}}</td>
+                <td>
+                  {% for value in values %}
+                    <li>{{value.libelle}}</li>
+                  {% endfor %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+          <p class=" alert alert-warning" role="alert">
+            Le schéma de cette base de données n'a pas encore été exploré.
+          </p>
+        {% endif %}
+      </div>
+
+      <div id="div_search_elemsbdd">
+          <button id="bt_executer" class="btn btn-outline-primary"> Explorer </button>
+      </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

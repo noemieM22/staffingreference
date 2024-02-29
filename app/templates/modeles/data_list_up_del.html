@@ -1,0 +1,138 @@
+ <!DOCTYPE html>
+<html lang="fr">
+{% extends 'ihm/base.html' %}
+{% load static %}
+{% load appli_tags %}
+{% load crispy_forms_tags %}
+{% block general %}
+<script src="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.js"></script>
+<script src="{% static 'imports/gestionImports.js' %}"></script>
+
+<div >
+<h1 class="text-center" > Gestion des bases de données de référence </h1>
+<hr>
+</div>
+
+<div class='row'>
+  <div class='col-2'>
+{% show_datasMenu  %}
+  </div>
+
+  <div class='col-10'>
+    <a href = '/bdds/{{tableMin}}listview'>Retour liste</a>
+    <div class='row'>
+      <div class='col-10'>
+        <h1 style='margin-bottom:0' tableref={{data.table.id}}>
+          {{data.table.libelle}}
+        </h1>
+      </div>
+      <div class='col-2' >
+        {%if request.user|has_group:"admin" %}
+          {% show_manageTableMenu data.table.id %}
+        {% endif %}
+
+    </div>
+  </div>
+    <!--div  id='reponse' class="reponse alert alert-info" role="alert">{{reponse}}</div-->
+
+        <!-- menu -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item"><a class="nav-link {{data.dataslist}}"   href="/donnees_recherchees/{{data.table.libelle|lower}}datas" role="tab" aria-controls="v-pills-{{data.table.libelle}}-datas-tab" aria-selected="true">Les données</a></li>
+          {%if request.user|has_group:"analysteRGPD" %}
+          <li class="nav-item"><a class="nav-link {{data.importcreate}}"   href="/donnees_recherchees/{{data.table.libelle|lower}}importcreate" role="tab" aria-controls="v-pills-{{data.table.libelle}}-import-tab" aria-selected="false">Import massif</a></li>
+          <li class="nav-item"><a class="nav-link {{data.importslist}}"   href="/donnees_recherchees/{{data.table.libelle|lower}}imports" role="tab" aria-controls="v-pills-{{data.table.libelle}}-listimports" aria-selected="false">Liste des imports</a></li>
+          <li class="nav-item"><a class="nav-link {{data.corrections}}"   href="/donnees_recherchees/{{data.table.libelle|lower}}importcorrections" role="tab" aria-controls="v-pills-{{data.table.libelle}}-corrections" aria-selected="false">Corrections</a></li>
+        </ul>
+
+        <!-- Formulaire création ou modification d'une donnée -->
+        {% if form %}
+        <div class="partform" >
+          <h2 class="h6">{{data.libelleaction}} :</h2>
+          <form id='form' method="post"  enctype="multipart/form-data">{% csrf_token %}
+            {{  form|crispy }}
+            <input type="submit" name="submit" value="{{data.action}}" class='btn btn-outline-secondary'>
+          </form>
+          <hr>
+          </div>
+        {% endif %}
+
+        <!-- Supprimer une donnée -->
+        {% if todel %}
+        <div class="partform" >
+          <h2 class="h6">{{data.libelleaction}} :</h2>
+          <form method="post">{% csrf_token %}
+              <p>Voulez-vous supprimer l'enregistrement "{{ todel }}"?</p>
+              <input type="submit" value="Confirmer la suppression">
+          </form>
+          </div>
+        {% endif %}
+
+          <!-- bloc data-->
+
+          <div>
+            <div id="toolbar">
+              <a class="nav-link {{data.datacreate}}" title='Ajouter une donnée'  href="/donnees_recherchees/{{data.table.libelle|lower}}datacreate" role="tab" aria-controls="v-pills-{{data.table.libelle}}-ajout-tab" aria-selected="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+            </a>
+            </div>
+
+            <table
+             id="table_datas"
+             class= "tabletags table table-hover table-bordered table-responsive[-sm|-md|-lg|-xl]"
+             data-url = "/donnees_recherchees/{{data.table.libelle.lower}}/"
+             data-pagination = 'true'
+             data-search = 'true'
+             data-show-columns="true"
+             data-toolbar="#toolbar">
+             <thead>
+               <tr>
+                 {%  for attribut in data.attributs %}
+                  <th
+                     data-field='{{attribut.libelle}}'
+                     data-sortable='true'>
+                     {{attribut.libelle|title}}</th>
+                  {%  endfor %}
+                  <th
+                     data-field='update'
+                     data-sortable='true'>update</th>
+                </tr>
+              </thead>
+             </table>
+            {% else %}
+
+            <table
+             id="table_datas"
+             class= "tabletags table table-hover table-bordered table-responsive[-sm|-md|-lg|-xl]"
+             data-url = "/donnees_recherchees/{{data.table.libelle}}/"
+             data-pagination = 'true'
+             data-search = 'true'
+             data-show-columns="true"
+             data-toolbar="#toolbar">
+             <thead>
+               <tr>
+                 {%  for attribut in data.attributs %}
+                  <th
+                     data-field='{{attribut.libelle}}'
+                     data-sortable='true'>
+                     {{attribut.libelle|title}}</th>
+                  {%  endfor %}
+               </tr>
+              </thead>
+             </table>
+
+             {% endif %}
+          </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#table_datas').bootstrapTable()
+
+});
+</script>
+{% endblock %}

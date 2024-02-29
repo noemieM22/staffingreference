@@ -22,13 +22,27 @@ class Asset_type(models.Model):
             models.UniqueConstraint(fields=['asset_type_FR'], name='unique Asset_type')
         ]
 
+
 class Asset(models.Model):
 
     asset_FR =  models.CharField("Libellé d'un actif",max_length=50)
     asset_category = models.ForeignKey(Asset_category, on_delete = models.CASCADE,related_name='Asset_category')
     asset_type = models.ForeignKey(Asset_type, on_delete = models.CASCADE,related_name='Asset_type')
+    asset_loan = models.BooleanField(default ='False')
 
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['asset_FR','asset_category'], name='unique Asset')
         ]
+
+
+# class Asset_loan(models.Model):
+#
+#     asset = models.ForeignKey(Asset, on_delete = models.CASCADE,related_name='Asset_loan')
+#     asset_loan = models.BooleanField(default ='False')
+#
+#
+#     class Meta:
+#         constraints = [
+#             models.UniqueConstraint(fields=['asset','asset_loan'], name='unique Asset_loan')
+#         ]
