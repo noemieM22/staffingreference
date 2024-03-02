@@ -74,6 +74,32 @@
         </div>
      </nav>
 
+     <h1 class="text-center" > Données de référence </h1>
+
+     <!-- onglets -->
+     <ul class="nav nav-tabs">
+       <li class="nav-item"><a href='/rule-type' class="nav-link {{rules}}">Type de règles</a></li>
+       <li class="nav-item"><a href='/asset' class="nav-link {{asset}}">Matériels</a></li>
+       <li class="nav-item"><a href='/entity' class="nav-link {{Entity}}">Affectations</a></li>
+
+     </ul> <!-- end onglets -->
+  
+
+     <div class="tab-content" id="v-pills-tabContent">
+
+       <!-- liens vers pages détail -->
+       <div  class=" justify-content-left">
+         {%if asset%}
+         <li>
+           <ul> <a href='/asset-category' >Catégories des Matériels</a></ul>
+           <ul> <a href='/asset-type' >Types de matériel</a></ul>
+       </li>
+         {%endif%}
+         {%if Entity%}
+         <li><ul> <a href='/entity-type' class="nav-link {{entites}}">Types d'affectation</a></ul></li>
+       </li>
+         {%endif%}
+       </div>
       <!-- corps de l'application -->
       <div name="general" style = "min-height:620px;height:auto;">
         {% block general %}
@@ -84,7 +110,7 @@
   <!-- pied de page -->
 
   <footer class="bg-dark text-center text-white">
-    <p>©Copyright 2050 par personne. Tous droits reversés. <a href="/appli/general/contact">Contact</a>  </p>
+    <p> </p>
 
   </footer>
   </div>

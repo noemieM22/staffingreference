@@ -20,6 +20,7 @@ class Staffing_rule_View(CreateView):
     def get_context_data(self, *args,**kwargs):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
+        data['title'] = 'Règles de dotation'
         data['tableToDisplay'] = 'Staffing_rule'
         return data
 
@@ -33,6 +34,7 @@ class Staffing_use_type_View(CreateView):
     def get_context_data(self, *args,**kwargs):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
-        data['rules'] = 'active'
+        data['rules'] = "Types d'usage"
+        data['title'] = 'Affectations'
         data['tableToDisplay'] = 'Staffing_use_type'
         return data

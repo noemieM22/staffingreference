@@ -9,11 +9,11 @@ register = template.Library()
 
 # list of objects for one table
 @register.inclusion_tag('tags/object_list.html')
-def show_object_list(tableToDisplay):
+def show_object_list(tableToDisplay,title):
     fields= get_fields(eval(tableToDisplay))
     lib = tableToDisplay.replace('_','').lower()
     url = '/datas/'+ lib +'/'
-    return {'urlasset': url,'lib':lib, 'fields' : fields}
+    return {'urlasset': url,'lib':lib, 'fields' : fields,'title':title}
 
 
 

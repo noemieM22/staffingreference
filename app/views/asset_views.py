@@ -9,8 +9,7 @@ import json
 from datas.models import Asset
 from app.forms import *
 
-# from datas.statics.datas_structure import get_fields_name
-
+# Creat views
 class Asset_View(CreateView):
     model = Asset
     form_class = Asset_Form
@@ -21,6 +20,7 @@ class Asset_View(CreateView):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
         data['asset'] = 'active'
+        data['title'] = 'Matériels'
         data['tableToDisplay'] = 'Asset'
         return data
 
@@ -33,6 +33,7 @@ class Asset_Type_View(CreateView):
     def get_context_data(self, *args,**kwargs):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
+        data['title'] = 'Types de matériel'
         data['asset'] = 'active'
         data['tableToDisplay'] = 'Asset_type'
         # data['fields']= get_fields_name(Asset_type)
@@ -47,6 +48,7 @@ class Asset_Category_View(CreateView):
     def get_context_data(self, *args,**kwargs):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
+        data['title'] = 'Catégories de matériel'
         data['asset'] = 'active'
         data['tableToDisplay'] = 'Asset_category'
         # data['fields']= get_fields_name(Asset_type)

@@ -17,9 +17,9 @@ class Staffing_use_type(models.Model):
         return self.staffing_use_type_FR
 
 class Staffing_rule(models.Model):
-    staffing_rule_asset = models.ForeignKey(Asset, on_delete = models.CASCADE,related_name='staffing_rule_asset',verbose_name='Asset')
-    staffing_rule_entity = models.ForeignKey(Entity, on_delete = models.CASCADE,related_name='staffing_rule_entity',verbose_name='Affectation')
-    staffing_rule_type = models.ForeignKey(Staffing_use_type, on_delete = models.CASCADE,related_name='staffing_rule_type',verbose_name='Dotation')
+    staffing_rule_asset = models.ForeignKey(Asset, on_delete = models.PROTECT,related_name='staffing_rule_asset',verbose_name='Asset')
+    staffing_rule_entity = models.ForeignKey(Entity, on_delete = models.PROTECT,related_name='staffing_rule_entity',verbose_name='Affectation')
+    staffing_rule_type = models.ForeignKey(Staffing_use_type, on_delete = models.PROTECT,related_name='staffing_rule_type',verbose_name='Dotation')
     staffing_rule_count = models.SmallIntegerField("Nombre",null=False, blank = False)
     staffing_rule_comment = models.TextField("Précisions")
 

@@ -15,7 +15,7 @@ class Entity_type(models.Model):
 
 class Entity(models.Model):
     entity_FR = models.CharField("Affectation",max_length=50)
-    entity_type = models.ForeignKey(Entity_type, on_delete = models.CASCADE,related_name='Entity_type',verbose_name="Type d'affectation")
+    entity_type = models.ForeignKey(Entity_type, on_delete = models.PROTECT,related_name='Entity_type',verbose_name="Type d'affectation")
 
     class Meta:
         constraints = [

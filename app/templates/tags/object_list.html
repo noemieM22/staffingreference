@@ -11,7 +11,7 @@
   <div id="response" class="alert alert-success" role="alert" style='display:none'>
   </div>
        <!-- table of asset category -->
-       <h2>{{lib|title}}</h2>
+       <h2>{{title|title}}</h2>
        <table
           id={{lib}}
           class= "table table-hover table-bordered table-responsive[-sm|-md|-lg|-xl]"
@@ -23,6 +23,10 @@
           >
           <thead>
             <tr >
+              <th
+                data-field=update
+                data-sortable='true'>
+              </th>
               {%for field in fields%}
                 {%for name,libelle in field.items%}
                   <th

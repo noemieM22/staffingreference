@@ -20,6 +20,7 @@ class Entity_View(CreateView):
     def get_context_data(self, *args,**kwargs):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
+        data['title'] = 'Affectations'
         data['Entity'] = 'active'
         data['tableToDisplay'] = 'Entity'
         return data
@@ -33,6 +34,7 @@ class Entity_Type_View(CreateView):
     def get_context_data(self, *args,**kwargs):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
+        data['title'] = "Types d'affectation"
         data['Entity'] = 'active'
         data['tableToDisplay'] = 'Entity_type'
         # data['fields']= get_fields_name(Entity_type)
