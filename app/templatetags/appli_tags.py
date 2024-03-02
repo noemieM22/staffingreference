@@ -1,15 +1,20 @@
 from django import template
 from datas.models import *
 
+from datas.statics.datas_structure import get_fields
 
+from django.apps import apps
 
 register = template.Library()
 
-# ---------------ASSET
-# liste des asset sous forme de tableau
-@register.inclusion_tag('tags/asset_list.html')
-def show_asset(type):
-    return {'url':'/datas/asset/?type='+type,'type':type}
+# list of objects for one table
+@register.inclusion_tag('tags/object_list.html')
+def show_object_list(tableToDisplay):
+    fields= get_fields(eval(tableToDisplay))
+    lib = tableToDisplay.replace('_','').lower()
+    url = '/datas/'+ lib +'/'
+    return {'urlasset': url,'lib':lib, 'fields' : fields}
+
 
 
 

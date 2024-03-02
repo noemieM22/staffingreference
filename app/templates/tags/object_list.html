@@ -1,0 +1,47 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!-- Bootstrap JS -->
+<script src="{% static 'ihm/css/bootstrap/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+<!-- block  list-->
+<div id="div_assetlist" class=''>
+  <!-- balise for response to an delete action-->
+  <div id="response" class="alert alert-success" role="alert" style='display:none'>
+  </div>
+       <!-- table of asset category -->
+       <table
+          id={{lib}}
+          class= "table table-hover table-bordered table-responsive[-sm|-md|-lg|-xl]"
+          data-url = {{urlasset}}
+          data-unique-id = 'id'
+          data-pagination = 'true'
+          data-search = 'true'
+          data-buttons-toolbar=".buttons-toolbar"
+          >
+          <thead>
+            <tr >
+              {%for field in fields%}
+                {%for name,libelle in field.items%}
+                  <th
+                      data-field={{name}}
+                      data-sortable='true'>
+                      {{libelle}}</th>
+                {%endfor%}
+              {%endfor%}
+                </tr>
+           </thead>
+          </table>
+
+
+
+</div> <!-- end block  list-->
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      // initiate table datas
+        $('#{{lib}}').bootstrapTable()
+    });
+</script>

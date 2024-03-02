@@ -3,7 +3,7 @@ from rest_framework.renderers import JSONRenderer
 
 from datas.models.staffingrule import *
 
-
+# use : individuel, partagé...
 class Staffing_Use_Type_Serializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:

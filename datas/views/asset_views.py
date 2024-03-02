@@ -10,7 +10,7 @@ class Asset_Category_APIView(viewsets.ModelViewSet):
     serializer_class = Asset_Category_Serializer
 
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['asset_category_FR','asset_category_level']
+    filterset_fields = ['asset_category_FR','asset_category_parent']
 
 class Asset_Type_APIView(viewsets.ModelViewSet):
 

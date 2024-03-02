@@ -9,8 +9,8 @@ app_name = 'datas'
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'asset', Asset_APIView)
-router.register(r'assetcategory', Asset_Category_APIView)
 router.register(r'assettype', Asset_Type_APIView)
+router.register(r'assetcategory', Asset_Category_APIView)
 
 router.register(r'entitytype', Entity_Type_APIView)
 router.register(r'entity', Entity_APIView)

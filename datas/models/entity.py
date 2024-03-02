@@ -10,7 +10,9 @@ class Entity_type(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['entity_type_FR'], name='unique entity_type_FR')
         ]
-
+    def __str__(self):
+        return self.entity_type_FR
+        
 class Entity(models.Model):
     entity_FR = models.CharField("Entité",max_length=50)
     entity_type = models.ForeignKey(Entity_type, on_delete = models.CASCADE,related_name='Entity_type')
