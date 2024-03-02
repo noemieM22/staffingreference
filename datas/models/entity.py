@@ -21,3 +21,6 @@ class Entity(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['entity_FR'], name='unique Entity_type')
         ]
+    def __str__(self):
+        toReturn = self.entity_type.entity_type_FR + ' - ' + self.entity_FR
+        return toReturn

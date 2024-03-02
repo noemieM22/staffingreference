@@ -13,6 +13,9 @@ router = routers.DefaultRouter()
 urlpatterns = [
 
     #path('', include(router.urls)),
+    path('',views.Staffing_rule_View.as_view(), name ='Rule'),
+    path('rule-type',views.Staffing_use_type_View.as_view(), name ='Rule-type'),
+
     path('asset',views.Asset_View.as_view(), name ='Asset'),
     path('asset-type/',views.Asset_Type_View.as_view(), name ='Asset-type'),
     path('asset-category/',views.Asset_Category_View.as_view(), name ='Asset-category'),

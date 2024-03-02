@@ -24,11 +24,11 @@ class Asset_Type_Serializer(serializers.HyperlinkedModelSerializer):
 
 class Asset_Serializer(serializers.HyperlinkedModelSerializer):
     asset_type = serializers.SerializerMethodField()
+    asset_category = serializers.SerializerMethodField()
 
     class Meta:
         model = Asset
-        fields = ['asset_FR','asset_type','asset_loan',]
-        # fields = ['asset_FR','asset_category','asset_type','asset_loan']
+        fields = ['asset_category','asset_FR','asset_type','asset_loan']
     def get_update(self,obj):
         if(obj.type ==0):
             adr = 'updateAssetServer'
@@ -38,7 +38,6 @@ class Asset_Serializer(serializers.HyperlinkedModelSerializer):
         resultUpdate = '<i class="menudots bi bi-three-dots"></i>'
         return resultUpdate
     def get_asset_type(self,obj):
-        asset_type= ''
-        if(obj.asset_type):
-            sgbd = obj.asset_type.asset_type_FR
-        return asset_type
+        return obj.asset_type.asset_type_FR
+    def get_asset_category(self,obj):
+        return obj.asset_category.asset_category_FR

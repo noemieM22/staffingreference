@@ -29,10 +29,9 @@ class Asset_type(models.Model):
         return self.asset_type_FR
 
 class Asset(models.Model):
-
-    asset_FR =  models.CharField("Libellé d'un actif",max_length=50)
-    asset_category = models.ForeignKey(Asset_category, on_delete = models.CASCADE,related_name='Asset_category',verbose_name='Catégorie')
     asset_type = models.ForeignKey(Asset_type, on_delete = models.CASCADE,related_name='Asset_type',verbose_name='Type')
+    asset_category = models.ForeignKey(Asset_category, on_delete = models.CASCADE,related_name='Asset_category',verbose_name='Catégorie')
+    asset_FR =  models.CharField("Libellé d'un actif",max_length=50)
     asset_loan = models.BooleanField(default ='False',verbose_name='Prêt possible')
 
 
@@ -40,15 +39,5 @@ class Asset(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['asset_FR'], name='unique Asset')
         ]
-
-
-# class Asset_loan(models.Model):
-#
-#     asset = models.ForeignKey(Asset, on_delete = models.CASCADE,related_name='Asset_loan')
-#     asset_loan = models.BooleanField(default ='False')
-#
-#
-#     class Meta:
-#         constraints = [
-#             models.UniqueConstraint(fields=['asset','asset_loan'], name='unique Asset_loan')
-#         ]
+    def __str__(self):
+        return self.asset_FR
