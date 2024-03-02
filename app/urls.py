@@ -13,10 +13,11 @@ router = routers.DefaultRouter()
 urlpatterns = [
 
     #path('', include(router.urls)),
-    # path('asset_category',views.Asset_category_View.as_view(), name ='Asset_category'),
     path('asset',views.Asset_View.as_view(), name ='Asset'),
     path('asset-type/',views.Asset_Type_View.as_view(), name ='Asset-type'),
     path('asset-category/',views.Asset_Category_View.as_view(), name ='Asset-category'),
 
+    path('entity',views.Entity_View.as_view(), name ='Entity'),
+    path('entity-type/',views.Entity_Type_View.as_view(), name ='Entity-type'),
     #path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

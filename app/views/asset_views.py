@@ -14,7 +14,7 @@ from app.forms import *
 class Asset_View(CreateView):
     model = Asset
     form_class = Asset_Form
-    template_name = 'menu_asset.html'
+    template_name = 'datas_references.html'
     success_url = reverse_lazy('app:Asset')
 
     def get_context_data(self, *args,**kwargs):
@@ -27,14 +27,13 @@ class Asset_View(CreateView):
 class Asset_Type_View(CreateView):
     model = Asset_type
     form_class = Asset_Type_Form
-    template_name = 'menu_asset.html'
+    template_name = 'datas_references.html'
     success_url = reverse_lazy('app:Asset-type')
 
     def get_context_data(self, *args,**kwargs):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
         data['assettype'] = 'active'
-        data['urlasset'] = '/datas/assettype/'
         data['tableToDisplay'] = 'Asset_type'
         # data['fields']= get_fields_name(Asset_type)
         return data
@@ -42,14 +41,13 @@ class Asset_Type_View(CreateView):
 class Asset_Category_View(CreateView):
     model = Asset_category
     form_class = Asset_Category_Form
-    template_name = 'menu_asset.html'
+    template_name = 'datas_references.html'
     success_url = reverse_lazy('app:Asset-category')
 
     def get_context_data(self, *args,**kwargs):
         data = super().get_context_data(**kwargs)
         # choix de l'onglet actif
         data['assetcategory'] = 'active'
-        data['urlasset'] = '/datas/assetcategory/'
         data['tableToDisplay'] = 'Asset_category'
         # data['fields']= get_fields_name(Asset_type)
         return data

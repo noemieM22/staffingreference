@@ -4,7 +4,7 @@ from django.db import models
 # Type : entité, fonction, mission, Catégorie
 class Entity_type(models.Model):
 
-    entity_type_FR = models.CharField("Type d'entité",max_length=50)
+    entity_type_FR = models.CharField("Type d'affectation",max_length=50)
 
     class Meta:
         constraints = [
@@ -12,10 +12,10 @@ class Entity_type(models.Model):
         ]
     def __str__(self):
         return self.entity_type_FR
-        
+
 class Entity(models.Model):
-    entity_FR = models.CharField("Entité",max_length=50)
-    entity_type = models.ForeignKey(Entity_type, on_delete = models.CASCADE,related_name='Entity_type')
+    entity_FR = models.CharField("Affectation",max_length=50)
+    entity_type = models.ForeignKey(Entity_type, on_delete = models.CASCADE,related_name='Entity_type',verbose_name="Type d'affectation")
 
     class Meta:
         constraints = [
