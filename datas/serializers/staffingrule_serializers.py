@@ -18,17 +18,25 @@ class Staffing_Use_Type_Serializer(serializers.HyperlinkedModelSerializer):
 class Staffing_Rule_Serializer(serializers.HyperlinkedModelSerializer):
     staffing_rule_asset = serializers.SerializerMethodField()
     staffing_rule_entity = serializers.SerializerMethodField()
+    staffing_rule_entity_type_FR = serializers.SerializerMethodField()
+    staffing_rule_entity_type = serializers.SerializerMethodField()
     staffing_rule_type = serializers.SerializerMethodField()
     update = serializers.SerializerMethodField()
 
     class Meta:
         model = Staffing_rule
-        fields = ['update','staffing_rule_asset','staffing_rule_entity','staffing_rule_type','staffing_rule_count','staffing_rule_comment']
+        fields = ['update','staffing_rule_asset','staffing_rule_entity_type','staffing_rule_entity_type_FR','staffing_rule_entity','staffing_rule_type','staffing_rule_count','staffing_rule_comment']
         # fields = ['staffing_rule_asset','staffing_rule_entity','staffing_rule_type','staffing_rule_count','staffing_rule_comment']
     def get_staffing_rule_asset(self,obj):
         return obj.staffing_rule_asset.asset_FR
     def get_staffing_rule_entity(self,obj):
         return obj.staffing_rule_entity.entity_FR
+    def get_staffing_rule_entity_type(self,obj):
+        type_entity = Entity_type.objects.get(id=obj.staffing_rule_entity.entity_type_id)
+        return type_entity.id
+    def get_staffing_rule_entity_type_FR(self,obj):
+        type_entity = Entity_type.objects.get(id=obj.staffing_rule_entity.entity_type_id)
+        return type_entity.entity_type_FR
     def get_staffing_rule_type(self,obj):
         return obj.staffing_rule_type.staffing_use_type_FR
     def get_update(self,obj):

@@ -1,0 +1,54 @@
+{% load crispy_forms_tags %}
+
+<!-- Bootstrap JS -->
+<script src="https://unpkg.com/bootstrap-table@1.22.3/dist/bootstrap-table.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+<!-- block  list-->
+<div id="div_assetlist" class=''>
+  <!-- balise for response to an delete action-->
+  <div id="response" class="alert alert-success" role="alert" style='display:none'>
+  </div>
+<!--menu-->
+<div class="row">
+<div class="col-3">
+
+
+    {% for ent_t,ent in rules.items%}
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#ent_t{ent_t.id}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ent_t}}
+        </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for ent,list in ent.items%}
+            <a class="dropdown-item" href="#ent{ent.id}">{{ent}}</a>
+            {%endfor%}
+            </div>
+
+        </li>
+    {%endfor%}
+    <a  href="/allstaffingrules" >Toutes les règles</a>
+
+
+</div>
+<!-- datas -->
+<div class="col-9">
+{% for ent_t,ent in rules.items%}
+  <h3 id="ent_t{{ent_t.id}}">{{ent_t}}</h3>
+  {% for ent,list in ent.items%}
+  <h4 id="ent{ent.id}">{{ent}}</h4>
+  <li>
+      {% for li in list%}
+      <ul>
+        {{li.staffing_rule_count}} {{li.staffing_rule_asset}}  {%if li.staffing_rule_comment%} <i>({{li.staffing_rule_comment}})</i>{%endif%}
+
+      </ul>
+      {%endfor%}
+  </li>
+  {%endfor%}
+{%endfor%}
+</div>
+</div>
+
+
+</div> <!-- end block  list-->

@@ -14,6 +14,7 @@ urlpatterns = [
 
     #path('', include(router.urls)),
     path('',views.Staffing_rule_View.as_view(), name ='Rule'),
+    path('allstaffingrules',views.Staffing_rule_all_View.as_view(), name ='Rules-all'),
     path('rule-type',views.Staffing_use_type_View.as_view(), name ='Rule-type'),
 
     path('staffing-rule/update/<int:pk>',views.Staffing_rule_update_View.as_view(), name ='Rule-update'),

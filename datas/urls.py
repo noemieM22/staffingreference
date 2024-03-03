@@ -16,6 +16,7 @@ router.register(r'entitytype', Entity_Type_APIView)
 router.register(r'entity', Entity_APIView)
 
 router.register(r'staffingusetype', Staffing_Use_Type_APIView)
+router.register(r'staffingusetype', Staffing_Use_Type_APIView)
 router.register(r'staffingrule', Staffing_Rule_APIView)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
